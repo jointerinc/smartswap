@@ -75,7 +75,7 @@ contract PeerPair is  PeerERC20,IPeerPair {
             _mint(to,tokenPriceUsd*10**9);
             return tokenPriceUsd*10**9; 
         }else{
-            uint256 ratio = totalReserve.mul(tokenPrice).mul(10**18).div(totalSupply);
+            uint256 ratio = totalSupply.mul(tokenPriceUsd).div(totalReserve);
             _mint(to,ratio);
             return ratio;
         }

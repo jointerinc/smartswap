@@ -13,9 +13,6 @@ interface IERC20Token {
     function getLock(address user) external view returns(uint256);
 }
 
-
-
-
 contract Governance  is Ownable{
     
     IERC20Token public tokenContract; 
@@ -198,7 +195,7 @@ contract Governance  is Ownable{
     function vote(uint256 _ballotId,uint yay) external returns (bool){
         require(_ballotId <= rulesIds,"Wrong rule ID");
         require(voted[msg.sender][_ballotId] == false,"already voted");
-        
+        _getCirculation();
         Ballot storage b = ballots[_ballotId];
         require(b.closeVote >= block.timestamp,"voting closed");
         uint256 power = _getVotingPower(msg.sender);
